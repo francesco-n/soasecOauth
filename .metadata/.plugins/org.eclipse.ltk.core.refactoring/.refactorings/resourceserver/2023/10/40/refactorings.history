@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename type &apos;com.example.demo.ResourceServerController&apos; to &apos;ArticlesController&apos;&#x0A;- Original project: &apos;resourceserver&apos;&#x0A;- Original element: &apos;com.example.demo.ResourceServerController&apos;&#x0A;- Renamed element: &apos;com.example.demo.ArticlesController&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;ResourceServerController&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src\/main\/java=/gradle_scope=/main=/=/gradle_used_by_scope=/main,test=/&lt;com.example.demo{ResourceServerController.java[ResourceServerController" matchStrategy="1" name="ArticlesController" qualified="false" references="true" similarDeclarations="false" stamp="1696324226328" textual="false" version="1.0"/>
-</session>
