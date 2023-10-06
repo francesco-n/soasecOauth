@@ -37,7 +37,7 @@ public class AuthServerConfig {
     JdbcUserDetailsManager users(DataSource dataSource, PasswordEncoder encoder) {
        UserDetails utente = User.builder()
                .username("utente")
-               .password("{bcrypt}$2a$10$jdJGhzsiIqYFpjJiYWMl/eKDOd8vdyQis2aynmFN0dgJ53XvpzzwC")
+               .password(encoder.encode("password"))
                .roles("USER")
                .build();
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
@@ -45,7 +45,6 @@ public class AuthServerConfig {
         return jdbcUserDetailsManager;
     }
   
-    
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
