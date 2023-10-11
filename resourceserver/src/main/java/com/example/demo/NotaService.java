@@ -9,18 +9,20 @@ public class NotaService implements INotaService{
 
 
     @Autowired
-    private IBlocco_note blocco_note;
+    private IBlocco_note bloccoNote;
 
         @Override
         public Iterable<Nota> getAll() {
         	String NomeUtente = SecurityContextHolder.getContext().getAuthentication().getName();
             
-			return blocco_note.findByautore(NomeUtente);
+			return bloccoNote.findByautore(NomeUtente);
         }
         
         @Override
         public Nota create(Nota nota) {
-        	return blocco_note.save(nota);
+        	String NomeUtente = SecurityContextHolder.getContext().getAuthentication().getName();
+        	nota.setAutore(NomeUtente);
+        	return bloccoNote.save(nota);
         }
     
 }

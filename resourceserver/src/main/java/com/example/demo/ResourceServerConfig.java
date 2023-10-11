@@ -18,9 +18,11 @@ public class ResourceServerConfig {
                 .securityMatcher("/articles/**")
                 .authorizeHttpRequests()
                 .requestMatchers("/articles/**").hasAuthority("SCOPE_user.read")
-                .and()
+                .and().csrf().disable()
+
                 .oauth2ResourceServer(server -> server
                         .jwt(Customizer.withDefaults()));
+        		
 		return http.build();
 	}
 }
