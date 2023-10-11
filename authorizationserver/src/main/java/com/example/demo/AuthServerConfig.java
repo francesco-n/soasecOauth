@@ -37,8 +37,14 @@ public class AuthServerConfig {
                .password(encoder.encode("password"))
                .roles("USER")
                .build();
+       UserDetails admin = User.builder()
+               .username("admin")
+               .password(encoder.encode("password"))
+               .roles("ADMIN")
+               .build();
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
         jdbcUserDetailsManager.createUser(utente);
+        jdbcUserDetailsManager.createUser(admin);
         return jdbcUserDetailsManager;
     }
   
