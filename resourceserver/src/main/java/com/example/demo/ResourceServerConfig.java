@@ -2,26 +2,32 @@ package com.example.demo;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
 public class ResourceServerConfig {
 
-	@SuppressWarnings("removal")
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .securityMatcher("/articles/**")
-                .authorizeHttpRequests()
-                .requestMatchers("/articles/**").hasAuthority("SCOPE_user.read")
-                .and().csrf().disable()
-
-                .oauth2ResourceServer(server -> server
-                        .jwt(Customizer.withDefaults()));
-		return http.build();
+        return http
+        		.csrf(csrf -> csrf.disable())
+        		.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        		.authorizeHttpRequests(auth -> {
+        			auth.requestMatchers("/").permitAll();
+        			auth.requestMatchers(HttpMethod.GET,"/articles").hasAuthority("SCOPE_leggiNote");
+        			auth.requestMatchers(HttpMethod.POST,"/articles").hasAuthority("SCOPE_scriviNote");
+        			auth.requestMatchers("/articles/**").hasAuthority("SCOPE_scriviNote");
+        		})
+        		.formLogin(Customizer.withDefaults())
+        		.oauth2ResourceServer(server -> server
+                        .jwt(Customizer.withDefaults()))
+        		
+        	.build();
 	}
 }
