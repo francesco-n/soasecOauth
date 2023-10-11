@@ -22,7 +22,6 @@ public class ResourceServerConfig {
 
                 .oauth2ResourceServer(server -> server
                         .jwt(Customizer.withDefaults()));
-        		
 		return http.build();
 	}
 }

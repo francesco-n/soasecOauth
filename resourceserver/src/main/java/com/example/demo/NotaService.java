@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -24,5 +26,11 @@ public class NotaService implements INotaService{
         	nota.setAutore(NomeUtente);
         	return bloccoNote.save(nota);
         }
+
+		@Override
+		public Optional<Nota> getById(int id) {
+			
+			return bloccoNote.findById(id);
+		}
     
 }
