@@ -1,5 +1,6 @@
 package com.example.demo;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -19,12 +20,12 @@ public class ResourceServerConfig {
         		.csrf(csrf -> csrf.disable())
         		.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         		.authorizeHttpRequests(auth -> {
-        			auth.requestMatchers("/").permitAll();
+        			auth.requestMatchers("/","/error").permitAll();
         			auth.requestMatchers(HttpMethod.GET,"/articles").hasAuthority("SCOPE_leggiNote");
         			auth.requestMatchers(HttpMethod.POST,"/articles").hasAuthority("SCOPE_scriviNote");
         			auth.requestMatchers("/articles/**").hasAuthority("SCOPE_scriviNote");
-        		})
-        		.formLogin(Customizer.withDefaults())
+        			
+        		}) 
         		.oauth2ResourceServer(server -> server
                         .jwt(Customizer.withDefaults()))
         		

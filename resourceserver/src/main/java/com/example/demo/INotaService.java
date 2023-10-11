@@ -10,4 +10,8 @@ public interface INotaService {
 	
 	public Optional<Nota> getById(int id);
 
+	Optional<Nota> update(int id, Nota nota);
+
+	boolean delete(int id);
+
 }

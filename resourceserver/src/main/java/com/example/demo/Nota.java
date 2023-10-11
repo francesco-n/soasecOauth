@@ -34,7 +34,7 @@ public class Nota {
         return titolo;
     }
   
-    public String getContento() {
+    public String getContenuto() {
         return contenuto;
     }
   
@@ -50,7 +50,7 @@ public class Nota {
         this.titolo = titolo;
     }
   
-    public void setContento(String contenuto) {
+    public void setContenuto(String contenuto) {
         this.contenuto = contenuto;
     }
   
