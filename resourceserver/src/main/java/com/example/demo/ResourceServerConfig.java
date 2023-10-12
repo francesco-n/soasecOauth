@@ -23,9 +23,9 @@ public class ResourceServerConfig {
         			auth.requestMatchers("/","/error").permitAll();
         			auth.requestMatchers(HttpMethod.GET,"/articles").hasAuthority("SCOPE_leggiNote");
         			auth.requestMatchers(HttpMethod.POST,"/articles").hasAuthority("SCOPE_scriviNote");
-        			auth.requestMatchers(HttpMethod.GET,"/articles/**").hasAuthority("SCOPE_LeggiNote");
-        			auth.requestMatchers(HttpMethod.PUT,"/articles/**").hasAuthority("SCOPE_ScriviNote");
-        			auth.requestMatchers(HttpMethod.DELETE,"/articles/**").hasAuthority("SCOPE_ScriviNote");
+        			auth.requestMatchers(HttpMethod.GET,"/articles/**").hasAuthority("SCOPE_leggiNote");
+        			auth.requestMatchers(HttpMethod.PUT,"/articles/**").hasAuthority("SCOPE_scriviNote");
+        			auth.requestMatchers(HttpMethod.DELETE,"/articles/**").hasAuthority("SCOPE_scriviNote");
         		}) 
         		.oauth2ResourceServer(server -> server
                         .jwt(Customizer.withDefaults()))
