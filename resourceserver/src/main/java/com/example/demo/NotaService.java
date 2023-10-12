@@ -12,11 +12,10 @@ public class NotaService implements INotaService{
 
     @Autowired
     private IBlocco_note bloccoNote;
-
+    
         @Override
         public Iterable<Nota> getAll() {
         	String NomeUtente = SecurityContextHolder.getContext().getAuthentication().getName();
-            
 			return bloccoNote.findByautore(NomeUtente);
         }
         
@@ -29,13 +28,20 @@ public class NotaService implements INotaService{
 
 		@Override
 		public Optional<Nota> getById(int id) {
+			String NomeUtente = SecurityContextHolder.getContext().getAuthentication().getName();
+			Optional<Nota> notaTrovata = bloccoNote.findByIdAndAutore(id,NomeUtente);
 			
-			return bloccoNote.findById(id);
+			if (notaTrovata.isEmpty()){
+				return Optional.empty();
+			}
+			return notaTrovata;
 		}
 		
 		@Override
 		public Optional<Nota> update(int id, Nota nota) {
-			Optional<Nota> notaTrovata = bloccoNote.findById(id);
+			String NomeUtente = SecurityContextHolder.getContext().getAuthentication().getName();
+			Optional<Nota> notaTrovata = bloccoNote.findByIdAndAutore(id,NomeUtente);
+			
 			
 			if (notaTrovata.isEmpty()) {
 				return Optional.empty();
@@ -49,7 +55,9 @@ public class NotaService implements INotaService{
 		
 		@Override
 		public boolean delete(int id) {
-			Optional<Nota> notaTrovata = bloccoNote.findById(id);
+			String NomeUtente = SecurityContextHolder.getContext().getAuthentication().getName();
+			Optional<Nota> notaTrovata = bloccoNote.findByIdAndAutore(id,NomeUtente);
+			
 			
 			if (notaTrovata.isEmpty()) {
 				return false;
