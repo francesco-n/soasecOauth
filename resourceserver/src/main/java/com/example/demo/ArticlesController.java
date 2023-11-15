@@ -22,13 +22,18 @@ public class ArticlesController {
 
     public ArticlesController() {
     }
-
-    @GetMapping("/articles")
+    
+    @GetMapping("/notes")
+    public Iterable<Nota> getPublicNotes() {
+    	return notaservice.getPublicNotes();
+    }
+    
+    @GetMapping("/profile/notes")
     public Iterable<Nota> getAll() {
         return notaservice.getAll();
     }
     
-    @GetMapping("/articles/{id}")
+    @GetMapping("/profile/notes/{id}")
     public Nota getById(@PathVariable int id) {
     	Optional<Nota> nota = notaservice.getById(id);
     	
@@ -38,12 +43,12 @@ public class ArticlesController {
     	return nota.get();
     }
     
-    @PostMapping("/articles")
+    @PostMapping("/profile/notes")
     public Nota create(@RequestBody Nota nota) {
     	return notaservice.create(nota);
     }
     
-    @PutMapping("/articles/{id}")
+    @PutMapping("/profile/notes/{id}")
     public Nota update(@PathVariable int id, @RequestBody Nota nota) {
         Optional<Nota> notaAggiornata = notaservice.update(id, nota);
         
@@ -54,7 +59,7 @@ public class ArticlesController {
     	return notaAggiornata.get();
     }
     
-    @DeleteMapping("/articles/{id}")
+    @DeleteMapping("/profile/notes/{id}")
     public void delete(@PathVariable int id) {
     	boolean isDeleted = notaservice.delete(id);
     	

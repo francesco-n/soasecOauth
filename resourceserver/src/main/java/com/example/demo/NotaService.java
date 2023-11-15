@@ -13,6 +13,10 @@ public class NotaService implements INotaService{
     @Autowired
     private IBlocco_note bloccoNote;
     
+    	@Override
+    	public Iterable<Nota> getPublicNotes() {
+    		return bloccoNote.findByPubblicaTrue();
+    	}
         @Override
         public Iterable<Nota> getAll() {
         	String NomeUtente = SecurityContextHolder.getContext().getAuthentication().getName();

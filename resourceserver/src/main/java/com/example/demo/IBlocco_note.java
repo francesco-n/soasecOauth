@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface IBlocco_note extends JpaRepository<Nota, Integer>{
     List<Nota> findByautore(String autore);
     Optional<Nota> findByIdAndAutore(int id, String autore);
+    List<Nota> findByPubblicaTrue();
 }

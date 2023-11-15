@@ -21,11 +21,12 @@ public class ResourceServerConfig {
         		.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         		.authorizeHttpRequests(auth -> {
         			auth.requestMatchers("/","/error").permitAll();
-        			auth.requestMatchers(HttpMethod.GET,"/articles").hasAuthority("SCOPE_leggiNote");
-        			auth.requestMatchers(HttpMethod.POST,"/articles").hasAuthority("SCOPE_scriviNote");
-        			auth.requestMatchers(HttpMethod.GET,"/articles/**").hasAuthority("SCOPE_leggiNote");
-        			auth.requestMatchers(HttpMethod.PUT,"/articles/**").hasAuthority("SCOPE_scriviNote");
-        			auth.requestMatchers(HttpMethod.DELETE,"/articles/**").hasAuthority("SCOPE_scriviNote");
+        			auth.requestMatchers(HttpMethod.GET,"/notes").permitAll();
+        			auth.requestMatchers(HttpMethod.GET,"/profile/notes").hasAuthority("SCOPE_leggiNote");
+        			auth.requestMatchers(HttpMethod.POST,"/profile/notes").hasAuthority("SCOPE_scriviNote");
+        			auth.requestMatchers(HttpMethod.GET,"/profile/notes/**").hasAuthority("SCOPE_leggiNote");
+        			auth.requestMatchers(HttpMethod.PUT,"/profile/notes/**").hasAuthority("SCOPE_scriviNote");
+        			auth.requestMatchers(HttpMethod.DELETE,"/profile/notes/**").hasAuthority("SCOPE_scriviNote");
         		}) 
         		.oauth2ResourceServer(server -> server
                         .jwt(Customizer.withDefaults()))

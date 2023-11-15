@@ -14,18 +14,20 @@ public class Nota {
     private String titolo;
     private String contenuto;
     private String autore;
+    private boolean pubblica;
 
 
     public Nota() {
     }
   
-    public Nota (int id, String titolo, String contenuto, String autore) {
+    public Nota (int id, String titolo, String contenuto, String autore, boolean pubblica) {
         this.id = id;
         this.titolo = titolo;
         this.contenuto = contenuto;
         this.autore = autore;
+        this.pubblica = pubblica;
     }
-
+    
     public int getId() {
         return id;
     }
@@ -40,6 +42,10 @@ public class Nota {
   
     public String getAutore() {
         return autore;
+    }
+    
+    public boolean getPubblica() {
+    	return pubblica;
     }
 
     public void setId(int id) {
@@ -56,6 +62,10 @@ public class Nota {
   
     public void setAutore(String autore) {
         this.autore = autore;
+    }
+    
+    public void setisPublic(boolean pubblica) {
+    	this.pubblica = pubblica;
     }
     
 }
