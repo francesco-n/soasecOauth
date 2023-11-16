@@ -29,6 +29,10 @@ public class OauthclientApplication {
 				.route( r -> r
 						.path("/notes")
 						.uri("http://localhost:8081"))
+				.route( r -> r
+						.path("/profile/notes/**")
+						.filters(GatewayFilterSpec::tokenRelay)
+						.uri("http://localhost:8081"))
 				.build();
 	}
 	
