@@ -37,10 +37,6 @@ import com.nimbusds.jose.proc.SecurityContext;
 @EnableMethodSecurity
 public class AuthServerConfig {
 	
-	public void configure(WebSecurity web) throws Exception {
-	    web.ignoring().requestMatchers("/connect/logout*");
-	}
-	
     @Bean
     EmbeddedDatabase datasource() {
         return new EmbeddedDatabaseBuilder()
@@ -101,15 +97,6 @@ public class AuthServerConfig {
 		return keyPair;
 	}
 
-	@Bean 
-	public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
-		return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
-	}
-	
-	@Bean 
-	public AuthorizationServerSettings authorizationServerSettings() {
-		return AuthorizationServerSettings.builder().build();
-	}
 
     
 }

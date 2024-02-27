@@ -19,8 +19,8 @@ import org.springframework.security.web.server.authentication.logout.ServerLogou
 @EnableWebFluxSecurity
 public class SecurityConfig {
 
-	@Autowired
-    private ReactiveClientRegistrationRepository clientRegistrationRepository;
+	//@Autowired
+    //private ReactiveClientRegistrationRepository clientRegistrationRepository;
 
 	@Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
@@ -28,20 +28,10 @@ public class SecurityConfig {
                 .authorizeExchange(exchange -> exchange
                         .pathMatchers("/notes").permitAll()
                         .anyExchange()
-                        .authenticated()).oauth2Login(Customizer.withDefaults()).logout(logout -> logout.logoutSuccessHandler(oidcLogoutSuccessHandler()));
+                        .authenticated()).oauth2Login(Customizer.withDefaults());
         return http.build();
     }
     
-    private ServerLogoutSuccessHandler oidcLogoutSuccessHandler() {
-        OidcClientInitiatedServerLogoutSuccessHandler oidcLogoutSuccessHandler =
-                new OidcClientInitiatedServerLogoutSuccessHandler(this.clientRegistrationRepository);
-
-        // Sets the location that the End-User's User Agent will be redirected to
-        // after the logout has been performed at the Provider
-        oidcLogoutSuccessHandler.setPostLogoutRedirectUri("{baseUrl}");
-
-        return oidcLogoutSuccessHandler;
-    }
 	
 }
 
