@@ -53,6 +53,7 @@ public class NotaService implements INotaService{
 			
 			notaTrovata.get().setTitolo(nota.getTitolo());
 			notaTrovata.get().setContenuto(nota.getContenuto());
+			notaTrovata.get().setisPublic(nota.getPubblica());
 			bloccoNote.save(notaTrovata.get());
 			return notaTrovata;
 		}
